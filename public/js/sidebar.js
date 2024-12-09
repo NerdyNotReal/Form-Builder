@@ -98,13 +98,14 @@ const generateSidebar = (data) => {
         sidebarItem.classList.add("sidebar__item");
         sidebarItem.setAttribute("draggable", "true");
         sidebarItem.setAttribute("data-type", type);
+        sidebarItem.setAttribute("data-label", label);
         sidebarItem.setAttribute("data-filter", label.toLowerCase());
 
         const sidebarItemIcon = document.createElement("span");
         sidebarItemIcon.classList.add("sidebar__item-icon");
 
         const sidebarItemLabel = document.createElement("p");
-        sidebarItemLabel.classList.add("sidebar__item-label", "text-body-medium");
+        sidebarItemLabel.classList.add("sidebar__item-label", "text-body-small");
         sidebarItemLabel.textContent = label;
 
         sidebarItem.appendChild(sidebarItemIcon);
@@ -146,7 +147,7 @@ document.querySelectorAll('.sidebar__tab').forEach(tab => {
 })
 
 
-// implementa search/filtering
+// implementing search/filtering
 const searchInput = document.querySelector(".sidebar__search-input");
 const sidebarSectionTitle = document.querySelectorAll(".sidebar__section-title");
 
@@ -165,4 +166,13 @@ const filterSidebar = (input) => {
 searchInput.addEventListener('input', (event) => {
     const searchInput = event.target.value;
     filterSidebar(searchInput);
-})
+});
+
+//implelemt drag start event on sidebar
+document.querySelectorAll(".sidebar__item").forEach((item) => {
+  item.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("text/plain", event.target.dataset.type); //type of data we are transfering it contains type like text, container etc
+    event.dataTransfer.setData("label", event.target.dataset.label);  //basically it holds label like submit buttom, text field
+  });
+});
+

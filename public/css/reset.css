@@ -20,7 +20,7 @@ a {
 
 textarea,input {
     font: inherit;
-    border: initial;
+    /* border: initial; */
     resize: none;
     outline: initial; 
 }

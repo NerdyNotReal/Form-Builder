@@ -110,9 +110,9 @@ body {
 	cursor: text;
   }
 
-  input:focus::placeholder {
+  /* input:focus::placeholder {
 	color: transparent;
-}
+} */
 
   .search-input:focus {
 	outline: 1px solid var(--color-neutrals-16);
