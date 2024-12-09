@@ -1,0 +1,35 @@
+/* RESET */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: initial;
+}
+
+
+textarea,input {
+    font: inherit;
+    border: initial;
+    resize: none;
+    outline: initial; 
+}
+
+button {
+    font: inherit;
+    border: initial;
+    outline: initial; 
+    background-color: initial;
+    color: inherit;
+}
+
