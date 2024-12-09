@@ -1,6 +1,7 @@
 const formcanvas = document.querySelector("#form-canvas");
 
 // implement dragover/drop event 
+
 formcanvas.addEventListener("dragover", (event) => {
     event.preventDefault();
 });
