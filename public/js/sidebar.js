@@ -66,6 +66,11 @@ const sidebarData = {
       { label: "Barcode Scanner", type: "barcode-scanner" },
       { label: "QRCode Generator", type: "qrcode-generator" },
     ],
+    "AT ko components": [
+      { label: "At DOM", type: "map-picker" },
+      { label: "AT Scanner", type: "barcode-scanner" },
+      { label: "AT  QRCode", type: "qrcode-generator" },
+    ]
   },
 };
 

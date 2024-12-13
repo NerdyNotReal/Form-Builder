@@ -1,12 +1,14 @@
 #form-canvas {
     width: calc(100% - 600px);
     height: 100%;
-    background-color: var(--color-neutrals-8);
+    background-color: var(--color-primary-86);
     padding: 8px 16px;
 
     position: fixed;
     top: 64px;
     left: 300px;
+
+
 }
 
 .form-canvas__item {
@@ -14,4 +16,17 @@
   margin-bottom: 10px;
   border: 1px sold var(--color-neutrals-16);
   background-color: var(--color-neutrals-8);
+}
+
+.form-canvas--message {
+  display: flex;
+  width: 664px;
+  height: 257px;
+  padding: 0px 84px 0px 84px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 16px;
+  border: 2px dashed var(--color-primary-52);
+  background: var(--color-primary-86);
 }

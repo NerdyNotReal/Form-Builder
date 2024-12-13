@@ -100,6 +100,10 @@ body {
     color: var(--color-primary-94);
   }
 
+  .btn__remove {
+	background-color: var(--color-sementic-red);
+  }
+
 
   .search-input {
 	width: 300px;
