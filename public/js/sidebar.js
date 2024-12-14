@@ -1,78 +1,119 @@
+// const sidebarData = {
+//   basic: {
+//     Layout: [
+//       { label: "Container", type: "container" },
+//       { label: "Grid Layout", type: "grid-layout" },
+//       { label: "Column Layout", type: "column-layout" },
+//       { label: "Row Layout", type: "row-layout" },
+//     ],
+//     "Dividers & Breaks": [
+//       { label: "Divider", type: "divider" },
+//       { label: "Page Break", type: "page-break" },
+//       { label: "Spacer", type: "spacer" },
+//     ],
+//     "Text Formatting": [
+//       { label: "Heading", type: "heading" },
+//       { label: "Paragraph", type: "paragraph" },
+//       { label: "Rich Text Editor", type: "rich-text-editor" },
+//     ],
+//     "Form Organization": [
+//       { label: "Section Header", type: "section-header" },
+//       { label: "Tabs (Form Sections)", type: "tabs" },
+//       { label: "Accordion (Collapsible Sections)", type: "accordion" },
+//     ],
+//   },
+//   components: {
+//     "Text Inputs": [
+//       { label: "Text Field (Single Line)", type: "text-field" },
+//       { label: "Text Area (Multiple Lines)", type: "text-area" },
+//       { label: "Password Field", type: "password-field" },
+//       { label: "Search Input", type: "search-input" },
+//     ],
+//     "Selection Inputs": [
+//       { label: "Radio Buttons", type: "radio-buttons" },
+//       { label: "Checkboxes", type: "checkboxes" },
+//       { label: "Dropdown Select", type: "dropdown-select" },
+//       { label: "Multi-select Dropdown", type: "multi-select-dropdown" },
+//       { label: "Date Picker", type: "date-picker" },
+//       { label: "Time Picker", type: "time-picker" },
+//       { label: "Rating Stars", type: "rating-stars" },
+//     ],
+//     "Interactive Inputs": [
+//       { label: "Slider", type: "slider" },
+//       { label: "Range Selector", type: "range-selector" },
+//       { label: "Toggle Switch", type: "toggle-switch" },
+//       { label: "Stepper Input", type: "stepper-input" },
+//     ],
+//     "File & Signature Inputs": [
+//       { label: "File Upload", type: "file-upload" },
+//       { label: "Image Upload", type: "image-upload" },
+//       { label: "Signature Field", type: "signature-field" },
+//     ],
+//     "Payments & Pricing": [
+//       { label: "Product Selector", type: "product-selector" },
+//       { label: "Price Field", type: "price-field" },
+//       { label: "Coupon Code", type: "coupon-code" },
+//       { label: "Payment Gateway", type: "payment-gateway" },
+//     ],
+//     "Form Actions": [
+//       { label: "Button", type: "button" },
+//       { label: "Captcha", type: "captcha" },
+//       { label: "Submit Button", type: "submit-button" },
+//       { label: "Reset Button", type: "reset-button" },
+//     ],
+//     "Advanced Components": [
+//       { label: "Map Picker", type: "map-picker" },
+//       { label: "Barcode Scanner", type: "barcode-scanner" },
+//       { label: "QRCode Generator", type: "qrcode-generator" },
+//     ]
+//   },
+// };
+
+
 const sidebarData = {
   basic: {
-    Layout: [
-      { label: "Container", type: "container" },
-      { label: "Grid Layout", type: "grid-layout" },
-      { label: "Column Layout", type: "column-layout" },
-      { label: "Row Layout", type: "row-layout" },
-    ],
-    "Dividers & Breaks": [
-      { label: "Divider", type: "divider" },
+    "Page Layout": [
+      { label: "New Section", type: "new-section" },
       { label: "Page Break", type: "page-break" },
+      { label: "Divider", type: "divider" },
       { label: "Spacer", type: "spacer" },
     ],
-    "Text Formatting": [
-      { label: "Heading", type: "heading" },
-      { label: "Paragraph", type: "paragraph" },
-      { label: "Rich Text Editor", type: "rich-text-editor" },
-    ],
-    "Form Organization": [
-      { label: "Section Header", type: "section-header" },
-      { label: "Tabs (Form Sections)", type: "tabs" },
-      { label: "Accordion (Collapsible Sections)", type: "accordion" },
+    "Basic Fields": [
+      { label: "Text Field", type: "text-field" },
+      { label: "Text Area", type: "text-area" },
+      { label: "Dropdown", type: "dropdown" },
+      { label: "Checkbox", type: "checkbox" },
+      { label: "Radio Button", type: "radio-button" },
+      { label: "Date Picker", type: "date-picker" },
+      { label: "Number Field", type: "number-field" },
+      { label: "Time Picker", type: "time-picker" },
+      { label: "Toggle Switch", type: "toggle-switch" },
     ],
   },
   components: {
-    "Text Inputs": [
-      { label: "Text Field (Single Line)", type: "text-field" },
-      { label: "Text Area (Multiple Lines)", type: "text-area" },
-      { label: "Password Field", type: "password-field" },
-      { label: "Search Input", type: "search-input" },
-    ],
-    "Selection Inputs": [
-      { label: "Radio Buttons", type: "radio-buttons" },
-      { label: "Checkboxes", type: "checkboxes" },
-      { label: "Dropdown Select", type: "dropdown-select" },
-      { label: "Multi-select Dropdown", type: "multi-select-dropdown" },
-      { label: "Date Picker", type: "date-picker" },
-      { label: "Time Picker", type: "time-picker" },
-      { label: "Rating Stars", type: "rating-stars" },
-    ],
-    "Interactive Inputs": [
-      { label: "Slider", type: "slider" },
-      { label: "Range Selector", type: "range-selector" },
-      { label: "Toggle Switch", type: "toggle-switch" },
-      { label: "Stepper Input", type: "stepper-input" },
-    ],
-    "File & Signature Inputs": [
-      { label: "File Upload", type: "file-upload" },
+    "Advanced Fields": [
       { label: "Image Upload", type: "image-upload" },
+      { label: "File Upload", type: "file-upload" },
+      { label: "Rating Scale", type: "rating-scale" },
       { label: "Signature Field", type: "signature-field" },
-    ],
-    "Payments & Pricing": [
-      { label: "Product Selector", type: "product-selector" },
-      { label: "Price Field", type: "price-field" },
-      { label: "Coupon Code", type: "coupon-code" },
-      { label: "Payment Gateway", type: "payment-gateway" },
-    ],
-    "Form Actions": [
+      { label: "Section Break", type: "section-break" },
+      { label: "Page Break", type: "page-break" },
       { label: "Button", type: "button" },
-      { label: "Captcha", type: "captcha" },
-      { label: "Submit Button", type: "submit-button" },
-      { label: "Reset Button", type: "reset-button" },
+      { label: "Cart/Item Selector", type: "cart-item-selector" }
     ],
-    "Advanced Components": [
-      { label: "Map Picker", type: "map-picker" },
-      { label: "Barcode Scanner", type: "barcode-scanner" },
-      { label: "QRCode Generator", type: "qrcode-generator" },
+    "Add-ons": [
+      { label: "Progress Bar", type: "progress-bar" },
+      { label: "Image/Video Embed", type: "media-embed" },
+      { label: "Password Field", type: "password-field" },
+      { label: "QR Code Field", type: "qr-code-field" },
+      { label: "Color Picker", type: "color-picker" },
+      { label: "Table Field", type: "table-field" },
+      { label: "Map Embed", type: "map-embed" },
+      { label: "Range Slider", type: "range-slider" }
     ],
-    "AT ko components": [
-      { label: "At DOM", type: "map-picker" },
-      { label: "AT Scanner", type: "barcode-scanner" },
-      { label: "AT  QRCode", type: "qrcode-generator" },
-    ]
   },
 };
+
 
 const sidebarContent = document.querySelector(".sidebar__content");
 
