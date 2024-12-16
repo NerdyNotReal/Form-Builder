@@ -82,7 +82,7 @@ const sidebarData = {
       { label: "Text Field", type: "text-field" },
       { label: "Text Area", type: "text-area" },
       { label: "Dropdown", type: "dropdown" },
-      { label: "Checkbox", type: "checkbox" },
+      { label: "Multiple Choice", type: "multiple-choice" },
       { label: "Radio Button", type: "radio-button" },
       { label: "Date Picker", type: "date-picker" },
       { label: "Number Field", type: "number-field" },
