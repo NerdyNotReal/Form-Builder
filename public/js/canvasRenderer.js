@@ -208,6 +208,8 @@ formcanvas.addEventListener("drop", (event) => {
       
       canvasItem.appendChild(optionsContainer)
       canvasItem.appendChild(addButton);   
+      canvasItem.appendChild(deleteCanvasItem());
+
       canvas.appendChild(canvasItem)
     }
   };

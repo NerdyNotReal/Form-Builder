@@ -63,6 +63,7 @@
     gap: 4px;
     align-self: stretch;
     border-bottom: 1px solid var(--color-neutrals-16);
+    color: var(--color-neutrals-94);
     background: var(--color-neutrals-2);
 }
 
@@ -70,6 +71,7 @@
     display: flex;
     padding: 8px 16px;
     align-items: center;
+    justify-content: flex-start;
     gap: 5px;
     background: var(--color-neutrals-4);
     border-bottom: 1px solid var(--color-neutrals-16);
@@ -93,4 +95,8 @@
 
 }
 
+.sidebar__item-label {
+    color: var(--color-neutrals-94);
+    margin: 0;   
+}
 

@@ -10,7 +10,7 @@
                 </g>
              </svg>
     </div>
-        <span class="workspace-info text-body-regular d-flex align-center gap-1"><span class = "Workspace-title text-neutral-16">My Workspaces</span> / <span class = "form-title medium">New Forms</span></span>
+        <span class="workspace-info text-body-regular d-flex align-center gap-1"><span class = "Workspace-title text-neutral-50">My Workspaces</span> / <span class = "form-title medium">New Forms</span></span>
     </div>
 
     <div class="header-center">
