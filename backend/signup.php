@@ -1,7 +1,7 @@
 <?php
 require 'db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
         die("All fields are required.");
     }
-
+    
     if ($password !== $confirm_password) {
         die("Passwords do not match.");
     }
@@ -19,13 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Hash the password
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-    // Insert user into the database
-    $sql = "INSERT INTO users (username, email, password_hash) VALUES ('$username', '$email', '$password_hash')";
+    $checkUser = "SELECT * FROM users WHERE username = '$username'";
+    $checkResult = mysqli_query($conn, $checkUser);
 
-    if (mysqli_query($conn, $sql)) {
-        echo "User registered successfully.";
+    if (mysqli_num_rows($checkResult) > 0) {
+        echo "username {$username} already exists";
     } else {
-        echo "Error: " . mysqli_error($conn);
-    }
+        // Insert user into the database
+        $sql = "INSERT INTO users (username, email, password_hash) VALUES ('$username', '$email', '$password_hash')";
+        if (mysqli_query($conn, $sql)) {
+            echo "User registered successfully.";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    } 
 }
 ?>

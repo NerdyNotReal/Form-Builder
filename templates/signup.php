@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Authentication</title>
-    <?php include '../backend/link.php'; ?>
-
+    <title>Signup</title>
 </head>
 <body>
-    <h2>Sign Up</h2>
-    <form id="signupForm">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-        <button type="button" id="signupButton">Sign Up</button>
-    </form>
-    
-    <h2>Login</h2>
-    <form id="loginForm">
-        <input type="text" id="loginUsername" placeholder="Username" required>
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <button type="button" id="loginButton">Login</button>
-    </form>
+    <div class="container">
+        <h2>Signup</h2>
+        
+        <!-- Signup form -->
+        <form id="signup">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required placeholder="Enter your username">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required placeholder="Enter your email">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required placeholder="Enter your password">
+            </div>
+            <div>
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" name="confirm_password" id="confirm_password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" name="submit">Signup</button>
+        </form>
 
-    <script src="script.js"></script>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+
+    <script src="../public/js/signup.js"></script>
 </body>
 </html>
