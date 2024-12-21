@@ -1,3 +1,12 @@
+<?php
+session_start();
+    include ('../backend/db.php');
+    $formId = $_GET['formId'];
+    
+    $sql = "SELECT title From forms where id = '$formId'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+?>
 <header class = "header d-flex justify-between align-center pb-2 pi-4 bb bg-neutral-2 text-neutral-94 w-full h-16">
     <div class="header__left d-flex justify-center align-center">
         <div class="header__logo">
@@ -10,7 +19,9 @@
                 </g>
              </svg>
     </div>
-        <span class="workspace-info text-body-regular d-flex align-center gap-1"><span class = "Workspace-title text-neutral-50">My Workspaces</span> / <span class = "form-title medium">New Forms</span></span>
+        <span class="workspace-info text-body-regular d-flex align-center gap-1"><span class = "Workspace-title text-neutral-50">My Workspaces</span> / <span class = "form-title medium"><?php
+echo $row['title'];
+?></span></span>
     </div>
 
     <div class="header-center">

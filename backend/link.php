@@ -7,11 +7,11 @@ foreach (glob($cssDir . "/*.css") as $cssFile) {
 }
 
 
-// Directory where your JS files are stored
-$jsDir = '../public/js';
-foreach (glob($jsDir . "/*.js") as $jsFile) {
+// // Directory where your JS files are stored
+// $jsDir = '../public/js';
+// foreach (glob($jsDir . "/*.js") as $jsFile) {
 
-    echo '<script src="' . $jsFile . '" type="module" defer></script>' . PHP_EOL;    
-}
+//     echo '<script src="' . $jsFile . '" type="module" defer></script>' . PHP_EOL;    
+// }
 
 ?>

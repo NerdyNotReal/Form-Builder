@@ -5,6 +5,19 @@ document.querySelector("#signup").addEventListener("submit", (event => {
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#password").value;
     const confirmPassword = document.querySelector("#confirm_password").value;
+    const terms = document.querySelector("#terms").checked;
+
+
+    if (!terms) {
+        alert("You must agree to the Terms of Service and Privacy Statement.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+    
 
     const formData = new FormData();
     formData.append("username", username);
@@ -23,6 +36,9 @@ document.querySelector("#signup").addEventListener("submit", (event => {
     })
     .then(data => {
         alert(data);
+    })
+    .catch((error) => {
+        alert("Something went wrong");
     })
 }));
 

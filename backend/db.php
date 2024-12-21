@@ -2,7 +2,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$dbname = "auth_system";
+$dbname = "formly_db";
 
 $conn = mysqli_connect($host, $username, $password, $dbname);
 

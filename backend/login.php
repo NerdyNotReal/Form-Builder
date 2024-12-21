@@ -23,11 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             echo "Login successful!";
+            echo  $_SESSION['user_id'];
         } else {
             echo "Invalid password.";
         }
     } else {
         echo "User not found.";
     }
+} else {
+    http_response_code(405);
+    echo "Invalid request method.";
 }
 ?>
