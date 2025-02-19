@@ -17,6 +17,10 @@ a {
     text-decoration: initial;
 }
 
+label {
+	display: block;
+}
+
 
 textarea,input {
     font: inherit;

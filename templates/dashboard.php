@@ -8,6 +8,15 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     
+
+    if (isset($_POST['logout'])) {
+        session_unset();
+        
+        session_destroy();
+        
+        header("Location: login.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +95,12 @@
     </table>
     </div>
 
+    <form action="" method="post">
+    <button type="submit" name="logout" class="logout-btn">Logout</button>
+</form>
 
+    <?php
+    ?>
 
     <script src="../public/js/createForm.js" defer></script>
 </body>
