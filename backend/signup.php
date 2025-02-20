@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     //username validation
     $usernameValidation = isValidUsername($username);
-    // if (!$usernameValidation['valid']) {
-    //     echo json_encode(["success" => false, "message" => $usernameValidation['message']]);
-    //     exit;
-    // }
+    if (!$usernameValidation['valid']) {
+        echo json_encode(["success" => false, "message" => $usernameValidation['message']]);
+        exit;
+    }
 
     // check if username already taken by other user
     if (isUsernameTaken($conn, $username)) {

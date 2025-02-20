@@ -1,4 +1,6 @@
 <?php 
+
+
 function isValidUsername($username) {
     // length must be (3 - 20)
     if (strlen($username) < 3 || strlen($username) > 20) {

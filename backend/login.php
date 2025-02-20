@@ -1,37 +1,36 @@
 <?php
 session_start();
 require 'db.php';
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Validation
+    // validate empty fields
     if (empty($username) || empty($password)) {
-        die("Username and password are required.");
+        echo json_encode(["success" => false, "message" => "All fields are required."]);
+        exit;
     }
 
-    // Check user in the database
-    $sql = "SELECT * FROM users WHERE username = '$username'";
+    // sanitize inputs
+    $username = mysqli_real_escape_string($conn, $username);
+
+    // fetch user from database
+    $sql = "SELECT id, username, password_hash FROM users WHERE username = '$username'";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-
-        // Verify the password
         if (password_verify($password, $user['password_hash'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            echo "Login successful!";
-            echo  $_SESSION['user_id'];
+            echo json_encode(["success" => true, "message" => "Login successful!"]);
         } else {
-            echo "Invalid password.";
+            echo json_encode(["success" => false, "message" => "Invalid username or password."]);
         }
     } else {
-        echo "User not found.";
+        echo json_encode(["success" => false, "message" => "Invalid username or password."]);
     }
 } else {
-    http_response_code(405);
-    echo "Invalid request method.";
+    echo json_encode(["success" => false, "message" => "Invalid request method."]);
 }
 ?>
