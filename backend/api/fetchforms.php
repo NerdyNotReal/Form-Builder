@@ -1,24 +1,24 @@
 <?php
 session_start();
-include('../db.php');
-header('Content-Type: application/json'); // for json response
+require '../db.php';
+header('Content-Type: application/json');
 
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(["success" => false, "message" => "User not logged in"]);
+    exit;
+}
 
-$userid = $_SESSION['user_id'];
-$sql = "SELECT * FROM forms Where owner_id = '$userid'";
-if (mysqli_query($conn, $sql)) {
-    $result = mysqli_query($conn, $sql);
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT id, title, description FROM forms WHERE owner_id = '$user_id'";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
     $forms = [];
-    
-    $_SESSION['form_title'] = $row['title'];
     while ($row = mysqli_fetch_assoc($result)) {
         $forms[] = $row;
     }
-
     echo json_encode($forms);
+} else {
+    echo json_encode([]);
 }
-
-
-
 ?>
-

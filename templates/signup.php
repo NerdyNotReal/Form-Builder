@@ -15,7 +15,7 @@
     <div class="signup">
         <div class="signup__header">
             <h2 class = "signup__header--title text-heading-medium">Create Account</h2>
-            <p class="signup__header--info text-body-regular">Already have an account? <a href="login.html">Login</a></p>
+            <p class="signup__header--info text-body-regular">Already have an account? <a href="login.php">Login</a></p>
             <div class="divider"></div>
         </div>
     

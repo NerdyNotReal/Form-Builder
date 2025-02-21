@@ -6,6 +6,11 @@ include('../db.php');
 header('Content-Type: application/json'); //for  json response
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'message' => 'User not logged in']);
+        exit;
+    }
+
     $userid = $_SESSION['user_id']; 
     $title = $_POST['formTitle']; 
     $description = $_POST['formDescription']; 
@@ -16,19 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql =  "INSERT INTO forms (title, description, owner_id) VALUES ('$title', '$description', '$userid')";
     
     if (mysqli_query($conn, $sql)) {
+        $form_id = mysqli_insert_id($conn);
         $response = [
-            'id' => $userid,
             'success' => true,
             'message' => 'Form created successfully!',
-            'title' => $title,
-            'description' => $description
+            'form' => [
+                'id' => $form_id,
+                'title' => $title,
+                'description' => $description,
+                'owner_id' => $userid
+            ]
         ];
     } else {
         $response = [
-            'success' => true,
-            'message' => 'Form created successfully!',
-            'title' => $title,
-            'description' => $description
+            'success' => false,
+            'message' => 'Error creating form: ' . mysqli_error($conn)
         ];
     }
 
