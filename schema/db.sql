@@ -11,18 +11,43 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Forms Table (Stores forms created by users)
-CREATE TABLE forms (
+-- Workspaces Table (For organizing forms)
+CREATE TABLE workspaces (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,              -- Form title
-    description TEXT,                         -- Description for the form
-    owner_id INT NOT NULL,                    -- Owner of the form (user ID)
-    status ENUM('draft', 'published') DEFAULT 'draft',  -- Form status
-    is_public BOOLEAN DEFAULT FALSE,          -- Whether form is public (viewable by others)
-    theme_settings JSON,                      -- Custom styling for the entire form (colors, fonts, etc.)
+    name VARCHAR(100) NOT NULL,              -- Workspace name
+    description TEXT,                        -- Workspace description
+    owner_id INT NOT NULL,                   -- Owner of the workspace
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (owner_id) REFERENCES users(id)
+);
+
+-- Forms Table (Stores forms created by users)
+CREATE TABLE forms (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    workspace_id INT NOT NULL,               -- Workspace the form belongs to
+    title VARCHAR(255) NOT NULL,             -- Form title
+    description TEXT,                        -- Description for the form
+    owner_id INT NOT NULL,                   -- Owner of the form (user ID)
+    status ENUM('draft', 'published') DEFAULT 'draft',  -- Form status
+    is_public BOOLEAN DEFAULT FALSE,         -- Whether form is public (viewable by others)
+    theme_settings JSON,                     -- Custom styling for the entire form (colors, fonts, etc.)
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (owner_id) REFERENCES users(id),
+    FOREIGN KEY (workspace_id) REFERENCES workspaces(id) ON DELETE CASCADE
+);
+
+-- Workspace Collaborators Table (Manages access to workspaces)
+CREATE TABLE workspace_collaborators (
+    workspace_id INT NOT NULL,
+    user_id INT NOT NULL,
+    role ENUM('viewer', 'editor', 'admin') DEFAULT 'viewer',
+    invited_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    accepted_at DATETIME,
+    PRIMARY KEY (workspace_id, user_id),
+    FOREIGN KEY (workspace_id) REFERENCES workspaces(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Form Collaboration Table (Manages access to forms by collaborators)

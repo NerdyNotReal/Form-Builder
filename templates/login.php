@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <?php include '../backend/link.php'; ?>
+    <?php include '../components/nav.php'; ?>
 </head>
 <body>
 
@@ -28,13 +29,28 @@
                 </div> -->
                 <div class="login__field">
                     <label for="password" class="text-body-regular">Password:</label>
-                    <input type="password" name="password" id="password" class="login__input" required placeholder="Enter your password">
+                    <div class="password-field">
+                        <input type="password" name="password" id="password" class="login__input" required placeholder="Enter your password">
+                        <button type = "button" class = "password-toggle" aria-label = "toggle password visibility">
+                        <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <p id="login_msg" class="text-body-small" style="color: red;"></p>
 
+                <div class="login__options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <label for="rememberMe" class = "text-body-small">Remember Me</label>
+                    </div>
+                    <a href="#" class="text-body-small text-link">Forgot password?</a>
+                </div>
+
                 <div class="login__submit">
-                    
-                    <button type="submit" name="submit" class="btn btn__primary">Login</button>
+                    <button type="submit" name="submit" class="btn btn__primary">
+                        <span class = "btn-text">Login</span>
+                        <span class="btn-spinner"></span>
+                    </button>
                 </div>
             </form>
 

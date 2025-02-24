@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <?php include '../backend/link.php'; ?>
-
-
+    <?php include '../components/nav.php'; ?>
 </head>
 <body>
-
-
     <div class="signup-container">
     <div class="signup">
         <div class="signup__header">

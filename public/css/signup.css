@@ -1,39 +1,33 @@
-.signup-container, .login-container {
+.signup-container {
     display: flex;
-    padding: 48px 68px;
+    height: calc(100vh - 56px);
+    margin-top: 56px;
+    padding: 0 68px;
     align-items: center;
     justify-content: space-between;
-
-    
 }
 
-.signup, .login {
+.signup {
     width: 438px;
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 16px;
+    gap: 12px;
     border-radius: 16px;
     border: 1px solid var(--color-primary-52);  
     background-color: var(--color-neutrals-8);
-
-    
-    
 }
 
 .hero-image {
-    background-color: red;
-    width: 680px;
+    width: 50%;
     height: 300px;
-    background: url(../images/signup-hero-image.png);
-    background-repeat: no-repeat;
+    background: url(../images/signup-hero-image.png) center center no-repeat;
     background-size: contain;
-    /* aspect-ratio: 9/16; */
 }
 
-.signup__header, .login__header {
+.signup__header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -41,22 +35,21 @@
     width: 100%;
 }
 
-.signup__header--info, .login__header--info {
+.signup__header--info {
     color: var(--color-neutrals-50);
     a {
         color: var(--color-sementic-blue);
     }
 }
 
-
-.signup__form, .login__form {
+.signup__form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 }
 
-.signup__field, .login__field {
+.signup__field {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -64,7 +57,7 @@
     gap: 2px;
 }
 
-.signup__input, .login__input {
+.signup__input {
     width: 100%;
     padding: 12px 8px;
     border-radius: 8px;
@@ -73,13 +66,12 @@
     color: var(--color-neutrals-94);
 }
 
-.signup__input:focus,
-.login__input:focus {
+.signup__input:focus {
     outline: 2px solid var(--color-primary-52);
     outline-offset: 2px;
 }
 
-.signup__submit, .login__submit {
+.signup__submit {
     display: flex;
     gap: 16px;
     flex-direction: column;
@@ -89,4 +81,21 @@
     display: flex;
     gap: 4px;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .signup-container {
+        padding: 24px;
+        flex-direction: column;
+    }
+    
+    .signup {
+        width: 100%;
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    .hero-image {
+        display: none;
+    }
 }

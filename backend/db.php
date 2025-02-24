@@ -2,7 +2,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$dbname = "formly_db";
+$dbname = "ezepze_db";
 
 $conn = mysqli_connect($host, $username, $password, $dbname);
 

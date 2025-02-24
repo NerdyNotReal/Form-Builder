@@ -10,10 +10,10 @@
 
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
-    <?php include '../includes/sidebar.php'; ?>
-    <?php include '../includes/canvas.php'; ?>
-    <?php include '../includes/styling-sidebar.php'; ?>
+    <?php include '../components/header.php'; ?>
+    <?php include '../components/sidebar.php'; ?>
+    <?php include '../components/canvas.php'; ?>
+    <?php include '../components/styling-sidebar.php'; ?>
 
 
     <script src="../public/js/sidebar.js" defer></script>
