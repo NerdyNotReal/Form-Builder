@@ -56,7 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3 class="text-heading-medium">${form.title}</h3>
                     <p class="text-body-regular text-neutral-50">${form.description || 'No description'}</p>
                     <div class="workspace__form-card-footer">
-                        <span class="text-body-small text-neutral-50">${new Date(form.created_at).toLocaleDateString()}</span>
+                        <div class="workspace__form-card-meta">
+                            <span class="text-body-small text-neutral-50">${new Date(form.created_at).toLocaleDateString()}</span>
+                            <span class="form-status form-status--${form.status}">${form.status}</span>
+                        </div>
                         <a href="form.php?id=${form.id}" class="btn btn--primary text-body-small">Open Form</a>
                     </div>
                 </div>

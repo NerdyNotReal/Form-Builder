@@ -83,7 +83,7 @@
     margin-bottom: 16px;
 }
 
-#popupCreateFrom {
+.popup {
     display: none; 
     position: fixed;
     z-index: 1000;
@@ -165,4 +165,33 @@
 
 .form-card--empty .form-card__content {
     color: var(--color-neutrals-50);
+}
+
+/* Form Status Styles */
+.workspace__form-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.form-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.form-status--draft {
+    background-color: #E5E7EB;
+    color: #4B5563;
+}
+
+.form-status--published {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.form-status--archived {
+    background-color: #FEE2E2;
+    color: #991B1B;
 }

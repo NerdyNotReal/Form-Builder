@@ -229,74 +229,201 @@ table,th,td {
     padding: 20px;
 }
 
-.workspace-card {
-    background: var(--color-neutrals-4);
+/* Base card styles that apply to all card types */
+.workspace-card,
+.workspace-card--add,
+.workspace-card--loading,
+.workspace-card--empty {
+    width: 300px;
+    height: 200px;
     border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    margin: 0 auto; /* Center cards in grid cells */
+}
+
+.workspace-card {
+    display: flex;
+    width: 300px;
+    height: auto;
+    min-height: 120px;
+    flex-direction: column;
+    border-radius: 8px;
+    border: 1px solid var(--color-neutrals-16);
+    background: var(--color-neutrals-4);
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    padding: 16px;
+    cursor: pointer;
 }
 
 .workspace-card:hover {
-    transform: translateY(-5px);
-}
-
-.workspace-card--add {
-    border: 2px dashed var(--color-neutrals-50);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    cursor: pointer;
-    background: var(--color-neutrals-6);
-}
-
-.workspace-card--loading {
-    border: 2px dashed var(--color-neutrals-16);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    animation: pulse 1.5s infinite;
-    background: var(--color-neutrals-6);
-}
-
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+    border-color: var(--color-sementic-blue);
 }
 
 .workspace-card__content {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.workspace-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .workspace-card__icon {
-    fill: var(--color-sementic-blue);
-    margin-bottom: 10px;
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutrals-50);
+    font-size: 1.2em;
 }
 
 .workspace-card__title {
-    font-size: 1.2em;
-    margin-bottom: 10px;
+    flex: 1;
     color: var(--color-neutrals-94);
-    font-family: Inter;
-    font-weight: 600;
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0;
 }
 
-.workspace-card__description {
+.workspace-card__form-count {
     color: var(--color-neutrals-50);
-    margin-bottom: 15px;
-    font-family: Inter;
-    font-weight: 400;
-    line-height: 24px;
+    font-size: 0.85em;
 }
 
-.workspace-card__button {
-    width: 100%;
-    margin-top: 10px;
+.workspace-card__forms {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-neutrals-50);
+}
+
+.workspace-card__extra-forms {
+    color: var(--color-neutrals-50);
+    font-size: 0.85em;
+}
+
+/* Loading Animation Styles */
+.workspace-card--loading {
+    background: var(--color-neutrals-4);
+    border: 1px solid var(--color-neutrals-16);
+    cursor: default;
+    padding: 16px;
+    height: auto;
+    min-height: 120px;
+}
+
+.loading-shimmer {
+    animation: shimmer 1.5s infinite linear;
+    background: linear-gradient(
+        90deg,
+        var(--color-neutrals-4) 0%,
+        var(--color-neutrals-8) 50%,
+        var(--color-neutrals-4) 100%
+    );
+    background-size: 200% 100%;
+}
+
+.loading-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+}
+
+.loading-title {
+    width: 60%;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.loading-form-count {
+    width: 30%;
+    height: 16px;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Form count styles for actual cards */
+.workspace-card__form-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-neutrals-50);
+    font-size: 0.85em;
+}
+
+.workspace-card__form-count i {
+    font-size: 1em;
+}
+
+/* Empty state card */
+.workspace-card--empty {
+    border: 1px solid var(--color-neutrals-16);
+    background: var(--color-neutrals-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.workspace-card--add {
+    width: 300px;
+    height: 200px;
+    border: 2px dashed var(--color-neutrals-50);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    background: var(--color-neutrals-6);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 20px;
+}
+
+.workspace-card--add .workspace-card__icon {
+    fill: var(--color-sementic-blue);
+    margin-bottom: 16px;
+    width: 48px;
+    height: 48px;
+    color: var(--color-neutrals-50);
+}
+
+.workspace-card--add .workspace-card__title {
+    color: var(--color-neutrals-94);
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+.workspace-card--add .workspace-card__text {
+    color: var(--color-neutrals-50);
+    font-size: 0.9em;
+}
+
+.workspace-card--add:hover {
+    background: var(--color-neutrals-8);
+    border-color: var(--color-sementic-blue);
+    transform: translateY(-2px);
 }
 
 .workspace-card__text {
@@ -304,28 +431,6 @@ table,th,td {
     margin-top: 10px;
     font-family: Inter;
     font-weight: 400;
-}
-
-.workspace-card--error {
-    border: 2px dashed var(--color-sementic-red);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    background: var(--color-neutrals-6);
-}
-
-.workspace-card--empty {
-    border: 2px dashed var(--color-neutrals-50);
-    background: var(--color-neutrals-6);
-}
-
-.workspace-card--error .workspace-card__content {
-    color: var(--color-sementic-red);
-}
-
-.workspace-card--empty .workspace-card__content {
-    color: var(--color-neutrals-50);
 }
 
 .dashboard-nav {
@@ -361,6 +466,122 @@ table,th,td {
 
 .dashboard-content {
     margin-top: 20px;
+}
+
+.workspace-card__options {
+    position: relative;
+}
+
+.workspace-card__menu-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    color: var(--color-neutrals-50);
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.workspace-card__menu-btn:hover {
+    background-color: var(--color-neutrals-16);
+    color: var(--color-sementic-blue);
+}
+
+.workspace-card__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-neutrals-4);
+    border: 1px solid var(--color-neutrals-16);
+    border-radius: 8px;
+    width: 200px;
+    padding: 8px;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.workspace-card__dropdown.active {
+    display: block;
+}
+
+.workspace-card__dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: var(--color-neutrals-94);
+    text-decoration: none;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.workspace-card__dropdown-item i {
+    font-size: 1em;
+    width: 16px;
+}
+
+.workspace-card__dropdown-item:hover {
+    background-color: var(--color-neutrals-16);
+}
+
+.workspace-card__dropdown-item--danger {
+    color: var(--color-sementic-red);
+}
+
+.workspace-card__dropdown-item--danger:hover {
+    background-color: var(--color-sementic-red);
+    color: white;
+}
+
+.workspace-card__actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-neutrals-16);
+}
+
+.workspace-card__action {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--color-neutrals-16);
+    background: var(--color-neutrals-4);
+    color: var(--color-neutrals-94);
+    font-size: 0.85em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.workspace-card__action i {
+    font-size: 1em;
+}
+
+.workspace-card__action:hover {
+    background: var(--color-neutrals-16);
+    border-color: var(--color-neutrals-50);
+}
+
+.workspace-card__action--danger {
+    color: var(--color-sementic-red);
+    border-color: var(--color-sementic-red);
+}
+
+.workspace-card__action--danger:hover {
+    background: var(--color-sementic-red);
+    color: white;
 }
 
 

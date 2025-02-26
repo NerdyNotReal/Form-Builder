@@ -1,7 +1,97 @@
-header {
+.header {
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     height: 64px;
+    padding: 0 24px;
+    background: var(--color-neutrals-2);
+    border-bottom: 1px solid var(--color-neutrals-16);
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+}
+
+.workspace-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.workspace-title {
+    color: var(--color-neutrals-50);
+}
+
+.form-title {
+    color: var(--color-neutrals-94);
+    font-weight: 500;
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header__right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.header__user-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.user-initials {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary-52);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-neutrals-2);
+}
+
+.header__right--cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+}
+
+.btn__primary {
+    background: var(--color-primary-52);
+}
+
+.btn__secondary {
+    background: transparent;
+    border-color: var(--color-neutrals-16);
+}
+
+.btn i {
+    font-size: 14px;
 }
