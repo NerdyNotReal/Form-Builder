@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Handle saved credentials
     const savedUsername = localStorage.getItem("rememberedUsername");
     const savedPassword = localStorage.getItem("rememberedPassword");
-
+    
     if (savedUsername && savedPassword) {
         document.querySelector("#username").value = savedUsername;
         document.querySelector("#password").value = savedPassword;
         document.querySelector("#rememberMe").checked = true;
     }
-    
 });
 
 // Add password toggle functionality
@@ -26,31 +26,43 @@ document.querySelector('.password-toggle').addEventListener('click', function() 
     }
 });
 
-document.querySelector('#loginForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+document.querySelector('#loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const username = document.querySelector("#username").value;
+    const password = document.querySelector("#password").value;
+    const rememberMe = document.querySelector("#rememberMe").checked;
+    const msg = document.getElementById('login_msg');
+    const button = document.querySelector('button[type="submit"]');
+    const btnText = button.querySelector('.btn-text');
+    const btnSpinner = button.querySelector('.btn-spinner');
+    
+    try {
+        button.disabled = true;
+        btnText.style.display = 'none';
+        btnSpinner.style.display = 'block';
+        msg.textContent = '';
+        msg.classList.remove('success', 'error');
 
-    let username = document.querySelector("#username").value;
-    let password = document.querySelector("#password").value;
-    let rememberMe = document.querySelector("#rememberMe").checked;
+        // Get redirect parameter from URL if it exists
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect');
 
-    let formdata = new FormData();
-    formdata.append("username", username);
-    formdata.append("password", password);
-
-    fetch("../backend/login.php", {
-        method: "POST",
-        body: formdata
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Network Response Error");
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("password", password);
+        if (redirect) {
+            formData.append("redirect", redirect);
         }
-        return response.text();
-    })
-    .then(data => {
-        const loginMsg = document.querySelector("#login_msg");
 
-        if (data.includes("Login successful!")) {
+        const response = await fetch("../backend/login.php", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // Handle remember me
             if (rememberMe) {
                 localStorage.setItem("rememberedUsername", username);
                 localStorage.setItem("rememberedPassword", password);
@@ -58,16 +70,27 @@ document.querySelector('#loginForm').addEventListener('submit', async function(e
                 localStorage.removeItem("rememberedUsername");
                 localStorage.removeItem("rememberedPassword");
             }
-            loginMsg.innerText = data;
-            window.location.href = "../templates/dashboard.php";
-        } else {
-            loginMsg.innerText = data;
-        }
-    })
-    .catch(error => {
-        console.log("ERROR");
-        localStorage.removeItem("rememberedUsername");
-        localStorage.removeItem("rememberedPassword");
 
-    });
-})
+            msg.textContent = data.message;
+            msg.classList.add('success');
+
+            // Redirect after a short delay to show the success message
+            setTimeout(() => {
+                window.location.href = data.redirect;
+            }, 1000);
+        } else {
+            msg.textContent = data.message;
+            msg.classList.add('error');
+            button.disabled = false;
+            btnText.style.display = 'block';
+            btnSpinner.style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        msg.textContent = "An error occurred. Please try again.";
+        msg.classList.add('error');
+        button.disabled = false;
+        btnText.style.display = 'block';
+        btnSpinner.style.display = 'none';
+    }
+});

@@ -9,6 +9,11 @@
     
     $userId = $_SESSION['user_id'];
     
+    // Fetch user data using mysqli_query
+    $query = "SELECT username, email FROM users WHERE id = '$userId'";
+    $result = mysqli_query($conn, $query);
+    $user = mysqli_fetch_assoc($result);
+    
     if (isset($_POST['logout'])) {
         session_unset();
         session_destroy();
@@ -30,9 +35,9 @@
         <nav class="dashboard-nav">
             <div class="dashboard-nav__user">
                 <h1 class="text-heading-large">My Workspaces</h1>
-                <form action="" method="post">
-                    <button type="submit" name="logout" class="btn btn--secondary">Logout</button>
-                </form>
+                <div class="nav-buttons">
+                    <button type="button" class="btn btn--secondary" id="profileBtn">Profile</button>
+                </div>
             </div>
         </nav>
 
@@ -89,6 +94,42 @@
         </div>
     </div>
 
+    <!-- Profile Popup -->
+    <div class="popup" id="profilePopup">
+        <div class="popup__content">
+            <span class="popup__close" id="closeProfilePopupBtn">&times;</span>
+            <h2 class="popup__title">My Profile</h2>
+            
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="info">Profile Info</button>
+                <button class="profile-tab" data-tab="settings">Settings</button>
+            </div>
+
+            <!-- Profile Info Tab -->
+            <div class="profile-tab-content active" id="info">
+                <div class="profile-info">
+                    <div class="form__group">
+                        <label class="form__label">Username</label>
+                        <p class="profile-text"><?php echo htmlspecialchars($user['username']); ?></p>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Email</label>
+                        <p class="profile-text"><?php echo htmlspecialchars($user['email']); ?></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="profile-tab-content" id="settings">
+                <div class="profile-settings">
+                    <form action="" method="post">
+                        <button type="submit" name="logout" class="btn btn--danger">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../public/js/dashboard.js"></script>
 </body>
 </html>

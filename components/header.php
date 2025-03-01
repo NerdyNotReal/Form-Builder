@@ -1,11 +1,13 @@
 <?php
 session_start();
     include ('../backend/db.php');
-    $formId = $_GET['formId'];
-    
-    $sql = "SELECT title From forms where id = '$formId'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
+    $formId = $_GET['id'];
+    if ($formId) {
+        $sql = "SELECT title, status From forms where id = '$formId'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $formStatus = $row['status'] ?? 'draft';
+    }
 ?>
 <header class="header">
     <div class="header__left">
@@ -24,7 +26,7 @@ session_start();
         <div class="workspace-info text-body-medium">
             <a href="../templates/workspace.php" class="text-neutral-50">My Workspaces</a>
             <span class="text-neutral-50">/</span>
-            <span class="text-neutral-94 medium"><?php echo htmlspecialchars($row['title']); ?></span>
+            <span class="text-neutral-94 medium form-title"><?php echo htmlspecialchars($row['title']); ?></span>
         </div>
     </div>
 
@@ -53,24 +55,20 @@ session_start();
                 <i class="fas fa-user-plus text-neutral-94"></i>
                 <span class="text-neutral-94">Invite</span>
             </button>
+            <?php if (isset($formId)): ?>
             <button class="btn btn__primary text-body-medium" onclick="publishForm()">
                 <i class="fas fa-paper-plane text-primary-94"></i>
                 <span class="text-primary-94">Publish</span>
             </button>
+            <?php endif; ?>
         </div>
     </div>
 </header>
 
+<script src="../public/js/formPreview.js"></script>
+<script src="../public/js/formPublish.js"></script>
 <script>
-function previewForm() {
-    console.log('Preview form');
-}
-
 function inviteCollaborators() {
     console.log('Invite collaborators');
-}
-
-function publishForm() {
-    console.log('Publish form');
 }
 </script>

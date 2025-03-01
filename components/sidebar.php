@@ -1,104 +1,102 @@
-<!-- <section id="sidebar">
-  <div class="sidebar__tabs" role="tablist">
-    <button class="sidebar__tab sidebar__tab--active text-body-medium" data-tab="basic">
-      Basic
-    </button>
-    <button class="sidebar__tab text-body-medium" data-tab="components">
-      Components
-    </button>
-  </div>
+<section id="sidebar">
+  <div class="sidebar__headers">
+    <div class="sidebar__tabs" role="tablist">
+      <button
+        class="sidebar__tab sidebar__tab--active text-body-medium"
+        data-tab="basic"
+        aria-selected="true"
+      >
+        Basic Fields
+      </button>
+      <button
+        class="sidebar__tab text-body-medium"
+        data-tab="advanced"
+        aria-selected="false"
+      >
+        Advanced
+      </button>
+    </div>
 
-  <div class="sidebar__search">
-    <input type="search" placeholder="Search" class="search-input sidebar__search-input" />
+    <div class="sidebar__search">
+      <input
+        type="search"
+        class="search-input sidebar__search-input"
+        placeholder="Search fields..."
+      />
+    </div>
   </div>
-
+  
   <div class="sidebar__content">
     <div class="sidebar__section sidebar__section--active" id="basic">
       <div class="sidebar__items">
-        <h3 class="sidebar__section-title text-body-medium bold">Layout</h3>
-
-        <div class="sidebar__item" draggable="true" data-type="container">
+        <h3 class="sidebar__section-title text-body-medium">Text Inputs</h3>
+        <div class="sidebar__item" draggable="true" data-type="text-field">
           <span class="sidebar__item-icon"></span>
-          <span class="sidebar__item-label">Container</span>
+          <span class="sidebar__item-label">Text Field</span>
         </div>
-
-        <div class="sidebar__item" draggable="true" data-type="grid-layout">
+        <div class="sidebar__item" draggable="true" data-type="text-area">
           <span class="sidebar__item-icon"></span>
-          <span class="sidebar__item-label">Grid Layout</span>
+          <span class="sidebar__item-label">Text Area</span>
+        </div>
+        <div class="sidebar__item" draggable="true" data-type="number-field">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Number Field</span>
+        </div>
+      </div>
+
+      <div class="sidebar__items">
+        <h3 class="sidebar__section-title text-body-medium">Choice Inputs</h3>
+        <div class="sidebar__item" draggable="true" data-type="dropdown">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Dropdown</span>
+        </div>
+        <div class="sidebar__item" draggable="true" data-type="radio-button">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Radio Button</span>
+        </div>
+        <div class="sidebar__item" draggable="true" data-type="toggle-switch">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Toggle Switch</span>
+        </div>
+      </div>
+
+      <div class="sidebar__items">
+        <h3 class="sidebar__section-title text-body-medium">Date & Time</h3>
+        <div class="sidebar__item" draggable="true" data-type="date-picker">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Date Picker</span>
+        </div>
+        <div class="sidebar__item" draggable="true" data-type="time-picker">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Time Picker</span>
         </div>
       </div>
     </div>
 
-
-    <div class="sidebar-items">
-      <h3 class="sidebar__section-title text-body-medium bold">Dividers & Breaks</h3>
-      <div class="sidebar__item" draggable="true" data-type="divider">
-        <span class="sidebar__item-icon"></span>
-        <span class="sidebar__item-label">Divider</span>
-      </div>
-
-      <div class="sidebar__item" draggable="true" data-type="page-break">
-        <span class="sidebar__item-icon"></span>
-        <span class="sidebar__item-label">Page Break</span>
-      </div>
-
-      <div class="sidebar__item" draggable="true" data-type="spacer">
-        <span class="sidebar__item-icon"></span>
-        <span class="sidebar__item-label">Spacer</span>
-      </div>
-    </div>
-
-      <div class="sidebar-items">
-        <h3 class="sidebar__section-title text-body-medium bold">Inputs Fields</h3>
-        <div class="sidebar__item" draggable="true" data-type="heading">
+    <div class="sidebar__section" id="advanced">
+      <div class="sidebar__items">
+        <h3 class="sidebar__section-title text-body-medium">File Uploads</h3>
+        <div class="sidebar__item" draggable="true" data-type="file-upload">
           <span class="sidebar__item-icon"></span>
-          <span class="sidebar__item-label">Heading</span>
+          <span class="sidebar__item-label">File Upload</span>
         </div>
-
-        <div class="sidebar__item" draggable="true" data-type="sub-heading">
+        <div class="sidebar__item" draggable="true" data-type="image-upload">
           <span class="sidebar__item-icon"></span>
-          <span class="sidebar__item-label">Subheading</span>
+          <span class="sidebar__item-label">Image Upload</span>
         </div>
       </div>
-    
 
-    <div class="sidebar__section" id="components">
-
+      <div class="sidebar__items">
+        <h3 class="sidebar__section-title text-body-medium">Special Fields</h3>
+        <div class="sidebar__item" draggable="true" data-type="signature-field">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Signature Field</span>
+        </div>
+        <div class="sidebar__item" draggable="true" data-type="rating-scale">
+          <span class="sidebar__item-icon"></span>
+          <span class="sidebar__item-label">Rating Scale</span>
+        </div>
+      </div>
     </div>
-  </div>
-</section> 
- -->
-
-<section id="sidebar">
-  <div class="sidebar__headers">
-  <div class="sidebar__tabs" role="tablist">
-    <button
-      class="sidebar__tab sidebar__tab--active text-body-medium"
-      data-tab="basic"
-      aria-selected="true"
-    >
-      Basic
-    </button>
-    <button
-      class="sidebar__tab text-body-medium"
-      data-tab="components"
-      aria-selected="true"
-    >
-      Components
-    </button>
-  </div>
-
-  <div class="sidebar__search">
-    <input
-      type="search"
-      class="search-input sidebar__search-input"
-      placeholder="search"
-    />
-  </div>
-  </div>
-  
-
-  <div class="sidebar__content">
-    <!-- sidebar section items will be dynamically injected here -->
   </div>
 </section>

@@ -1,6 +1,7 @@
 -- Database creation
-CREATE DATABASE form_builder_db;
-USE form_builder_db;
+DROP DATABASE IF EXISTS ezepze_db;
+CREATE DATABASE ezepze_db;
+USE ezepze_db;
 
 -- Users Table (For storing basic user information)
 CREATE TABLE users (
@@ -38,17 +39,33 @@ CREATE TABLE forms (
     FOREIGN KEY (workspace_id) REFERENCES workspaces(id) ON DELETE CASCADE
 );
 
--- Workspace Collaborators Table (Manages access to workspaces)
-CREATE TABLE workspace_collaborators (
+-- Workspace Users Table (Manages access to workspaces)
+CREATE TABLE workspace_users (
     workspace_id INT NOT NULL,
     user_id INT NOT NULL,
-    role ENUM('viewer', 'editor', 'admin') DEFAULT 'viewer',
-    invited_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    accepted_at DATETIME,
+    role ENUM('owner', 'admin', 'member', 'viewer') DEFAULT 'member',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (workspace_id, user_id),
     FOREIGN KEY (workspace_id) REFERENCES workspaces(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- Workspace Invite Links Table
+CREATE TABLE workspace_invites (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    workspace_id INT NOT NULL,
+    token VARCHAR(64) NOT NULL,
+    role ENUM('viewer', 'member', 'admin') DEFAULT 'member',
+    created_by INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    expires_at DATETIME,
+    used_at DATETIME,
+    used_by INT,
+    FOREIGN KEY (workspace_id) REFERENCES workspaces(id) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (used_by) REFERENCES users(id) ON DELETE SET NULL,
+    UNIQUE KEY (token)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Form Collaboration Table (Manages access to forms by collaborators)
 CREATE TABLE form_collaborators (

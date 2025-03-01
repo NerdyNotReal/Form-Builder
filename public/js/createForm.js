@@ -19,35 +19,37 @@ createForm.addEventListener("submit", (event) => {
         method: "POST", 
         body: formdata,
     })
-    .then(response => response.json())
+    .then(response => {
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             alert("Form created Successfully!");
-            // Refresh the forms table
+            // console.log(data);
             location.reload();
         } else {
             alert(data.message || "Something went wrong.");
         }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Error: ' + error);
+        console.error('Error', error);
+        alert('Error'+  error);
     });
 });
 
 fetch("../backend/api/fetchforms.php")
 .then(response => response.json())
-.then(forms => {
-    console.log('Fetched forms:', forms); // Debug output
-    const tableBody = document.querySelector(".form-table__body");
-    
-    if (!tableBody) {
-        console.error('Table body element not found');
-        return;
+.then(response => {
+    if (!response.success) {
+        throw new Error(response.message);
     }
-
-    tableBody.innerHTML = ''; // Clear existing rows
+    const forms = response.data;
+    const tableBody = document.querySelector(".form-table__body");
+    if (!tableBody) {
+        throw new Error('Table body not found');
+    }
     
+    tableBody.innerHTML = "";
     if (forms && forms.length > 0) {
         forms.forEach(form => {
             const row = document.createElement('tr');
@@ -59,8 +61,7 @@ fetch("../backend/api/fetchforms.php")
             `;
             tableBody.appendChild(row);
         });
-
-        // Add click handlers
+        
         document.querySelectorAll('.form-table__body tr').forEach(row => {
             row.addEventListener('click', () => {
                 const formId = row.dataset.formId;
@@ -68,9 +69,9 @@ fetch("../backend/api/fetchforms.php")
             });
         });
     } else {
-        tableBody.innerHTML = '<tr><td colspan="3">No forms found</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="3">No Forms found...</td></tr>';
     }
 })
 .catch(error => {
-    console.error('Error fetching forms:', error);
+    alert("Error fetching forms: " + error);
 });

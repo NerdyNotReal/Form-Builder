@@ -45,6 +45,25 @@
     gap: 16px;
 }
 
+.header__actions .form-state-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: var(--color-neutrals-16);
+    border-radius: 6px;
+    margin: 0 8px;
+}
+
+.header__actions .form-state-toggle span {
+    font-size: 14px;
+    color: var(--color-neutrals-94);
+}
+
+.header__actions .toggle-switch {
+    margin: 0 4px;
+}
+
 .header__right {
     display: flex;
     align-items: center;
@@ -94,4 +113,59 @@
 
 .btn i {
     font-size: 14px;
+}
+
+.form-state-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: var(--color-neutrals-16);
+    border-radius: 6px;
+    margin: 0 8px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-neutrals-50);
+    transition: .2s;
+    border-radius: 20px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .2s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--color-primary-52);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(16px);
 }

@@ -1,5 +1,4 @@
 <?php
-ob_start(); // Start output buffering
 session_start();
 include('../db.php');
 header('Content-Type: application/json');
@@ -11,8 +10,9 @@ try {
 
     $userId = $_SESSION['user_id'];
     $workspaceId = $_POST['workspaceId'] ?? null;
-    $title = $_POST['formTitle'] ?? '';
-    $description = $_POST['formDescription'] ?? '';
+    $title = $_POST['title'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $fields = $_POST['fields'] ?? '';
 
     if (!$workspaceId || !$title) {
         throw new Exception('Missing required fields', 400);
@@ -47,20 +47,41 @@ try {
     }
 
     $formId = mysqli_insert_id($conn);
+
+    // Add form elements if provided
+    if ($fields) {
+        $fields = json_decode($fields, true);
+        if (is_array($fields)) {
+            $position = 0;
+            foreach ($fields as $field) {
+                $insertElementQuery = "INSERT INTO form_elements (form_id, element_type, label, is_required, position, properties) 
+                                    VALUES (?, ?, ?, ?, ?, ?)";
+                $stmt = mysqli_prepare($conn, $insertElementQuery);
+                $properties = isset($field['options']) ? json_encode(['options' => $field['options']]) : null;
+                $isRequired = $field['required'] ?? false;
+                mysqli_stmt_bind_param($stmt, "issiis", 
+                    $formId, 
+                    $field['type'],
+                    $field['label'],
+                    $isRequired,
+                    $position,
+                    $properties
+                );
+                
+                if (!mysqli_stmt_execute($stmt)) {
+                    throw new Exception('Failed to add form element: ' . mysqli_error($conn));
+                }
+                $position++;
+            }
+        }
+    }
+
     mysqli_commit($conn);
 
-    ob_clean(); // Clear output buffer
     echo json_encode([
         'success' => true,
         'message' => 'Form created successfully',
-        'form' => [
-            'id' => $formId,
-            'title' => $title,
-            'description' => $description,
-            'workspace_id' => $workspaceId,
-            'owner_id' => $userId,
-            'status' => 'draft'
-        ]
+        'formId' => $formId
     ]);
 
 } catch (Exception $e) {
@@ -70,7 +91,6 @@ try {
     
     $code = $e->getCode() ?: 500;
     http_response_code($code);
-    ob_clean(); // Clear output buffer
     echo json_encode([
         'success' => false,
         'error' => $e->getMessage()
@@ -82,6 +102,5 @@ try {
     if (isset($conn)) {
         mysqli_close($conn);
     }
-    ob_end_flush(); // End output buffering
 }
 ?>

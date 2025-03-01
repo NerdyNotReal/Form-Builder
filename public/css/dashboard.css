@@ -217,6 +217,15 @@
     background: var(--color-neutrals-8);
 }
 
+.btn--danger {
+    background: var(--color-sementic-red);
+    color: white;
+}
+
+.btn--danger:hover {
+    background: #d32f2f;
+}
+
 /* temperory style */
 table,th,td {
     border: 1px solid white;
@@ -584,8 +593,76 @@ table,th,td {
     color: white;
 }
 
+.profile-tabs {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-neutrals-16);
+    margin-bottom: 1.5rem;
+}
+
+.profile-tab {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    color: var(--color-neutrals-50);
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-tab.active {
+    color: var(--color-neutrals-94);
+}
+
+.profile-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-sementic-blue);
+}
+
+.profile-tab-content {
+    display: none;
+}
+
+.profile-tab-content.active {
+    display: block;
+}
+
+.workspace-card__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.workspace-card__role {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: capitalize;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.workspace-card__role.owner {
+    background: var(--color-sementic-blue-10);
+    color: var(--color-sementic-blue);
+}
+
+.workspace-card__role.admin {
+    background: var(--color-sementic-purple-10);
+    color: var(--color-sementic-purple);
+}
+
+.workspace-card__role.member {
+    background: var(--color-neutrals-16);
+    color: var(--color-neutrals-50);
+}
 
 
-  
+
+
 
 

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = mysqli_real_escape_string($conn, $title);
     $description = mysqli_real_escape_string($conn, $description);
 
-    $sql =  "INSERT INTO forms (title, description, owner_id) VALUES ('$title', '$description', '$userid')";
+    $sql =  "INSERT INTO forms (title, description, owner_id, status) VALUES ('$title', '$description', '$userid', 'draft')";
     
     if (mysqli_query($conn, $sql)) {
         $form_id = mysqli_insert_id($conn);
@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'id' => $form_id,
                 'title' => $title,
                 'description' => $description,
-                'owner_id' => $userid
+                'owner_id' => $userid,
+                'status' => 'draft'
             ]
         ];
     } else {

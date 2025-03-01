@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+// Redirect to dashboard if already logged in
+if (isset($_SESSION['user_id'])) {
+    // Check if there's a pending invite
+    if (isset($_SESSION['pending_invite_token'])) {
+        $token = $_SESSION['pending_invite_token'];
+        unset($_SESSION['pending_invite_token']);
+        header("Location: join.php?token=" . urlencode($token));
+    } else {
+        header("Location: dashboard.php");
+    }
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

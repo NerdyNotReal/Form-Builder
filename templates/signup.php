@@ -28,19 +28,32 @@
             </div>
             <div class = "signup__field">
                 <label for="password" class = "text-body-regular">Password:</label>
-                <input type="password" name="password" id="password" class = "signup__input" required placeholder="Enter your password">
+                <div class="password-field">
+                    <input type="password" name="password" id="password" class="signup__input" required placeholder="Enter your password">
+                    <button type="button" class="password-toggle" aria-label="toggle password visibility">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
             </div>
             <div class = "signup__field">
                 <label for="confirm_password" class = "text-body-regular">Confirm Password:</label>
-                <input type="password" name="confirm_password" id="confirm_password" class = "signup__input" required placeholder="Enter your password">
+                <div class="password-field">
+                    <input type="password" name="confirm_password" id="confirm_password" class="signup__input" required placeholder="Enter your password">
+                    <button type="button" class="password-toggle" aria-label="toggle password visibility">
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
             </div>
-
+            <p id="signup_msg" class="text-body-small"></p>
             <div class="signup__submit">
                 <div class="signup__submit--terms">
                     <input type="checkbox" id = "terms" >
                     <label for="terms" class = "text-body-small">I agree to the Terms of Service and Privacy Statement</label>
                 </div>
-                <button type="submit" name="submit" class = "btn btn__primary">Signup</button>
+                <button type="submit" name="submit" class = "btn btn__primary">
+                    <span class="btn-text">Sign Up</span>
+                    <span class="btn-spinner"></span>
+                </button>
             </div>
         </form>
 

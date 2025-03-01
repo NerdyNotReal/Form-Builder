@@ -4,32 +4,59 @@ include('../db.php');
 
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['success' => false, 'error' => 'Unauthorized']);
-    exit();
-}
+try {
+    if (!isset($_SESSION['user_id'])) {
+        throw new Exception('Unauthorized', 401);
+    }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'error' => 'Method not allowed']);
-    exit();
-}
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Method not allowed', 405);
+    }
 
-$userId = $_SESSION['user_id'];
-$name = mysqli_real_escape_string($conn, $_POST['workspaceName']);
-$description = mysqli_real_escape_string($conn, $_POST['workspaceDescription']);
+    $userId = $_SESSION['user_id'];
+    $name = $_POST['workspaceName'] ?? '';
+    $description = $_POST['workspaceDescription'] ?? '';
 
-if (empty($name)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Workspace name is required']);
-    exit();
-}
+    if (empty($name)) {
+        throw new Exception('Workspace name is required', 400);
+    }
 
-$sql = "INSERT INTO workspaces (name, description, owner_id, created_at) VALUES ('$name', '$description', '$userId', NOW())";
+    // Start transaction
+    mysqli_begin_transaction($conn);
 
-if (mysqli_query($conn, $sql)) {
+    // Create workspace
+    $createWorkspaceSql = "INSERT INTO workspaces (name, description, owner_id, created_at) VALUES (?, ?, ?, NOW())";
+    $createWorkspaceStmt = mysqli_prepare($conn, $createWorkspaceSql);
+    
+    if (!$createWorkspaceStmt) {
+        throw new Exception('Failed to prepare statement: ' . mysqli_error($conn));
+    }
+
+    mysqli_stmt_bind_param($createWorkspaceStmt, "ssi", $name, $description, $userId);
+
+    if (!mysqli_stmt_execute($createWorkspaceStmt)) {
+        throw new Exception('Failed to create workspace: ' . mysqli_error($conn));
+    }
+
     $workspaceId = mysqli_insert_id($conn);
+
+    // Add owner to workspace_users
+    $addUserSql = "INSERT INTO workspace_users (workspace_id, user_id, role, created_at) VALUES (?, ?, 'owner', NOW())";
+    $addUserStmt = mysqli_prepare($conn, $addUserSql);
+    
+    if (!$addUserStmt) {
+        throw new Exception('Failed to prepare statement: ' . mysqli_error($conn));
+    }
+
+    mysqli_stmt_bind_param($addUserStmt, "ii", $workspaceId, $userId);
+
+    if (!mysqli_stmt_execute($addUserStmt)) {
+        throw new Exception('Failed to add owner to workspace: ' . mysqli_error($conn));
+    }
+
+    // Commit transaction
+    mysqli_commit($conn);
+
     echo json_encode([
         'success' => true,
         'message' => 'Workspace created successfully',
@@ -39,12 +66,25 @@ if (mysqli_query($conn, $sql)) {
             'description' => $description
         ]
     ]);
-} else {
-    http_response_code(500);
+
+} catch (Exception $e) {
+    if (isset($conn)) {
+        mysqli_rollback($conn);
+    }
+    $code = $e->getCode() ?: 500;
+    http_response_code($code);
     echo json_encode([
         'success' => false,
-        'error' => 'Failed to create workspace: ' . mysqli_error($conn)
+        'error' => $e->getMessage()
     ]);
+} finally {
+    if (isset($createWorkspaceStmt)) {
+        mysqli_stmt_close($createWorkspaceStmt);
+    }
+    if (isset($addUserStmt)) {
+        mysqli_stmt_close($addUserStmt);
+    }
+    if (isset($conn)) {
+        mysqli_close($conn);
+    }
 }
-
-mysqli_close($conn);

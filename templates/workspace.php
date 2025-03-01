@@ -39,7 +39,8 @@ if (!$workspaceId) {
                 </a>
                 <div class="workspace__header--links">
                     <button class="btn btn--secondary" id="inviteBtn">Invite</button>
-                    <button class="btn btn--primary" id="createFormBtn">Create New Form</button>
+                    <button class="btn btn--secondary" id="createFromTemplateBtn" style="display: none;">Use Template</button>
+                    <button class="btn btn--primary" id="createFormBtn" style="display: none;">Create New Form</button>
                 </div>
             </div>
 
@@ -61,10 +62,15 @@ if (!$workspaceId) {
 
             <div class="workspace__forms workspace__forms--grid">
                 <!-- Loading state -->
-                <div class="workspace__form-card workspace__form-card--loading workspace__form-card--skeleton">
-                    <div class="workspace__form-card-content">
-                        <div class="skeleton-text"></div>
-                        <div class="skeleton-text"></div>
+                <div class="workspace-card workspace-card--loading workspace-card--skeleton">
+                    <div class="workspace-card__content">
+                        <div class="workspace-card__header">
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                        <div class="workspace-card__info">
+                            <div class="skeleton-text"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,6 +97,74 @@ if (!$workspaceId) {
                     <button type="submit" class="btn btn--primary">Create Form</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Templates Popup -->
+    <div id="templatesPopup" class="popup">
+        <div class="popup__content">
+            <span class="popup__close" id="closeTemplatesPopupBtn">&times;</span>
+            <h2 class="popup__title">Choose a Template</h2>
+            <div class="templates-grid">
+                <div class="template-card" data-template="contact">
+                    <h3>Contact Form</h3>
+                    <p>Basic contact form with name, email, and message fields</p>
+                </div>
+                <div class="template-card" data-template="survey">
+                    <h3>Survey Template</h3>
+                    <p>Customer feedback survey with multiple choice questions</p>
+                </div>
+                <div class="template-card" data-template="registration">
+                    <h3>Registration Form</h3>
+                    <p>User registration form with personal details</p>
+                </div>
+                <div class="template-card" data-template="event">
+                    <h3>Event Registration</h3>
+                    <p>Event signup form with attendee information</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite Popup -->
+    <div id="invitePopup" class="popup">
+        <div class="popup__content">
+            <span class="popup__close" id="closeInvitePopupBtn">&times;</span>
+            <h2 class="popup__title">Invite Collaborators</h2>
+            
+            <form id="inviteForm" class="form">
+                <div class="form__group">
+                    <label class="form__label" for="inviteRole">Role</label>
+                    <select id="inviteRole" name="role" class="form__input" required>
+                        <option value="member">Member</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <p class="form__help-text">
+                        Members can view and edit forms. Admins can also manage workspace settings and members.
+                    </p>
+                </div>
+
+                <div class="invite-link-container">
+                    <input type="text" id="inviteLink" class="form__input" readonly 
+                           placeholder="Click 'Generate New Link' to create an invite link">
+                    <button type="button" id="copyInviteLink" class="btn btn--secondary" disabled>
+                        <i class="fa-regular fa-copy"></i>
+                        Copy
+                    </button>
+                    <button type="button" id="generateInviteLink" class="btn btn--primary">
+                        <i class="fa-solid fa-rotate"></i>
+                        Generate New Link
+                    </button>
+                </div>
+                <p class="form__help-text">Share this link with people you want to invite to your workspace</p>
+            </form>
+
+            <div class="invite-list">
+                <h3>Current Members</h3>
+                <div id="collaboratorsList" class="collaborators-list">
+                    <!-- Members will be loaded here -->
+                </div>
+            </div>
         </div>
     </div>
 
